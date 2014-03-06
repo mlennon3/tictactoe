@@ -1,3 +1,4 @@
+import java.io.BufferedReader;
 import java.io.PrintStream;
 
 /**
@@ -5,14 +6,22 @@ import java.io.PrintStream;
  */
 public class GameRunner {
 
+//    public static  board;
     private final PrintStream stream;
+    private final BufferedReader reader;
 
-    public GameRunner(PrintStream stream) {
+    public GameRunner(PrintStream stream, BufferedReader reader) {
         this.stream = stream;
+        this.reader = reader;
     }
 
     public void go() {
         printEmptyBoard();
+        promptForMove();
+    }
+
+    private void promptForMove() {
+        stream.println("Please Choose A Number 1-9");
     }
 
     private void printEmptyBoard() {
