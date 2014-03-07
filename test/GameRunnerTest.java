@@ -37,14 +37,6 @@ public class GameRunnerTest {
 
     }
 
-    @Test
-    public void shouldReturnFirstLineOfBoard() throws IOException {
-        runner.go();
-        verify(stream).println("_|_|_\n" +
-                               "_|_|_\n" +
-                               " | | \n");
-
-    }
 
     @Test
     public void shouldTakeMoveFromGetInputAndPassItToBoard() throws IOException {

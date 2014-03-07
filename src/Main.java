@@ -7,7 +7,7 @@ import java.nio.Buffer;
 
 class Main {
     public static void main(String[]args) throws IOException {
-        Board board = new Board();
+        Board board = new Board(System.out);
         GetInput in = new GetInput(new BufferedReader(new InputStreamReader(System.in)));
         GameRunner gamerunner = new GameRunner(System.out, in, board);
         gamerunner.go();

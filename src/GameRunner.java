@@ -19,7 +19,7 @@ public class GameRunner {
 
 
     public void go() throws IOException {
-        printEmptyBoard();
+        board.printBoard();
         tellBoardNextMove();
     }
 
@@ -38,9 +38,4 @@ public class GameRunner {
         return in.returnUserInput();
     }
 
-    private void printEmptyBoard() {
-        stream.println( "_|_|_\n"+
-                "_|_|_\n"+
-                " | | \n");
-    }
 }
