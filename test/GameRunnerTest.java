@@ -37,6 +37,7 @@ public class GameRunnerTest {
     public void shouldTakeMoveFromGetInputAndPassItToBoard() throws IOException {
         when(in.returnUserInput()).thenReturn(1);
         when(board.isEmptySpace(1)).thenReturn(true);
+        when(board.isFull()).thenReturn(false).thenReturn(true);
 
         runner.go();
 
@@ -48,6 +49,8 @@ public class GameRunnerTest {
     public void shouldTakeMoveFromSecondPlayerAndPassItToBoard() throws IOException{
         when(in.returnUserInput()).thenReturn(1).thenReturn(2);
         when(board.isEmptySpace(2)).thenReturn(true);
+        when(board.isFull()).thenReturn(false).thenReturn(false).thenReturn(true);
+
         runner.go();
 
         verify(board).receiveMove(2, "O");
@@ -57,6 +60,7 @@ public class GameRunnerTest {
     @Test
     public void shouldPromptPlayer1ToMove() throws IOException {
         when(board.isEmptySpace(1)).thenReturn(true).thenReturn(true);
+        when(board.isFull()).thenReturn(false).thenReturn(true);
         when(in.returnUserInput()).thenReturn(1);
         runner.go();
         verify(stream).println("Player 1 please go");
@@ -66,6 +70,8 @@ public class GameRunnerTest {
     public void shouldPromptPlayer2ToMove() throws  IOException {
         when(in.returnUserInput()).thenReturn(1);
         when(board.isEmptySpace(1)).thenReturn(true);
+        when(board.isFull()).thenReturn(false).thenReturn(false).thenReturn(true);
+
 
         runner.go();
 
@@ -77,10 +83,19 @@ public class GameRunnerTest {
     public void shouldDisplayLocationAlreadyTaken() throws IOException {
         when(in.returnUserInput()).thenReturn(1);
         when(board.isEmptySpace(1)).thenReturn(false).thenReturn(true);
+        when(board.isFull()).thenReturn(false).thenReturn(true);
+
 
         runner.go();
 
         verify(stream).println("Location Already Taken");
+    }
+
+    @Test
+    public void shouldPlayUntilBoardIsFull() throws IOException {
+        when(board.isFull()).thenReturn(true);
+        runner.go();
+        verify(stream).println("Game is a draw");
     }
 
 }

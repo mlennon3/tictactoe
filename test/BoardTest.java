@@ -74,4 +74,21 @@ public class BoardTest {
 
     }
 
+    @Test
+    public void shouldReturnTrueWhenBoardIsFull() {
+        for (int i = 0; i < 9; i++) {
+            tokens.add("*");
+        }
+        assertEquals(board.isFull(), true);
+    }
+
+    @Test
+    public void shouldreturnFalseWhenBoardIsNotFull() {
+        for (int i = 0; i < 9; i++) {
+            tokens.add(" ");
+        }
+        board.receiveMove(9, "X");
+        assertEquals(board.isFull(), false);
+    }
+
 }

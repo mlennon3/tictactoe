@@ -29,10 +29,9 @@ public class GameRunner {
         gameLoop();
     }
 
-    private void gameLoop() throws  IOException {
-        int turn = 0;
+    private void gameLoop() throws IOException {
         board.printBoard();
-        while (turn < 2) {
+        while (!board.isFull()) {
             Player currentPlayer = turnOrder.remove(0);
 
             stream.println(currentPlayer.getName() + " please go");
@@ -41,8 +40,9 @@ public class GameRunner {
 
             turnOrder.add(1, currentPlayer);
             board.printBoard();
-            turn++;
         }
+        stream.println("Game is a draw");
+
     }
 
     private void tellBoardNextMove(String piece) throws IOException {
@@ -51,8 +51,8 @@ public class GameRunner {
             stream.println("Location Already Taken");
             currentMove = getUserMove();
         }
-            board.receiveMove(currentMove, piece);
-        }
+        board.receiveMove(currentMove, piece);
+    }
 
 
     private Integer getUserMove() throws IOException {

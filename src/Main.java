@@ -8,7 +8,7 @@ import java.util.ArrayList;
  */
 
 class Main {
-    public static void main(String[]args) throws IOException {
+    public static void main(String[] args) throws IOException {
         ArrayList tokens = new ArrayList<String>();
         for (int i = 0; i < 9; i++) {
             tokens.add(" ");
