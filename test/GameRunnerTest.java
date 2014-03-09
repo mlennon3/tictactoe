@@ -25,8 +25,8 @@ public class GameRunnerTest {
     stream  = mock(PrintStream.class);
     in = mock(GetInput.class);
     board = mock(Board.class);
-    player1 = mock(Player.class);
-    player2 = mock(Player.class);
+    player1 = new Player("X", "Player 1");
+    player2 = new Player("O", "Player 2");
     runner = new GameRunner(stream, in, board, player1, player2);
 
 
@@ -44,4 +44,31 @@ public class GameRunnerTest {
 
     }
 
+    @Test
+    public void shouldTakeMoveFromSecondPlayerAndPassItToBoard() throws IOException{
+        when(in.returnUserInput()).thenReturn(1).thenReturn(2);
+
+        runner.go();
+
+        verify(board).receiveMove(2, "O");
+
+    }
+
+    @Test
+    public void shouldPromptPlayer1ToMove() throws IOException {
+
+        runner.go();
+        verify(stream).println("Player 1 please go");
+    }
+
+    @Test
+    public void shouldPromptPlayer2ToMove() throws  IOException {
+        when(in.returnUserInput()).thenReturn(1);
+
+        runner.go();
+
+        verify(stream).println("Player 2 please go");
+    }
 }
+
+

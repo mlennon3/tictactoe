@@ -1,5 +1,6 @@
 import java.io.IOException;
 import java.io.PrintStream;
+import java.util.ArrayList;
 
 /**
  * Created by mslennon on 3/6/14.
@@ -11,7 +12,7 @@ public class GameRunner {
     private final Board board;
     private Player player1;
     private Player player2;
-    private Player currentPlayer;
+    private ArrayList<Player> turnOrder = new ArrayList<Player>();
 
     public GameRunner(PrintStream stream, GetInput in, Board board, Player player1, Player player2) {
         this.stream = stream;
@@ -19,6 +20,8 @@ public class GameRunner {
         this.board = board;
         this.player1 = player1;
         this.player2 = player2;
+        this.turnOrder.add(player1);
+        this.turnOrder.add(player2);
     }
 
 
@@ -27,14 +30,21 @@ public class GameRunner {
     }
 
     private void gameLoop() throws  IOException {
+        int turn = 0;
         board.printBoard();
-        tellBoardNextMove();
-        board.printBoard();
+        while (turn < 2) {
+            Player currentPlayer = turnOrder.remove(0);
+            stream.println(currentPlayer.getName() + " please go");
+            tellBoardNextMove(currentPlayer.getPiece());
+            turnOrder.add(1, currentPlayer);
+            board.printBoard();
+            turn++;
+        }
     }
 
-    private void tellBoardNextMove() throws IOException {
+    private void tellBoardNextMove(String piece) throws IOException {
         Integer currentMove = getUserMove();
-        board.receiveMove(currentMove, "X");
+        board.receiveMove(currentMove, piece);
     }
 
 

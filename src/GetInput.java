@@ -16,7 +16,7 @@ public class GetInput {
 
 
     public Integer returnUserInput() throws IOException {
-
+        response = "0";
         while(!isWithinOneAndNine(response)) {
             response = reader.readLine();
 

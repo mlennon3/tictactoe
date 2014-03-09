@@ -14,8 +14,8 @@ class Main {
             tokens.add(" ");
         }
 
-        Player player1 = new Player("X");
-        Player player2 = new Player("O");
+        Player player1 = new Player("X", "Player 1");
+        Player player2 = new Player("O", "Player 2");
 
         Board board = new Board(System.out, tokens);
         GetInput in = new GetInput(new BufferedReader(new InputStreamReader(System.in)));
