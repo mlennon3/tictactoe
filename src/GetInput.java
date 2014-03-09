@@ -15,14 +15,13 @@ public class GetInput {
     }
 
 
-    public String returnUserInput() throws IOException {
+    public Integer returnUserInput() throws IOException {
 
-        responseInt = 0;
         while(!isWithinOneAndNine(response)) {
             response = reader.readLine();
 
         }
-        return response;
+        return Integer.parseInt(response);
 
         }
 

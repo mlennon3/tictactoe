@@ -1,50 +1,31 @@
 import java.io.PrintStream;
-import java.util.HashMap;
+import java.util.ArrayList;
 
 /**
  * Created by mslennon on 3/6/14.
  */
 public class Board {
     private PrintStream stream;
-    private HashMap moveToBoardIndex;
     private String board;
+    private ArrayList tokens;
 
-    public Board(PrintStream stream) {
+    public Board(PrintStream stream, ArrayList<String> tokens) {
         this.stream = stream;
-        this.board = ("_|_|_\n"+
-                     "_|_|_\n"+
-                     " | | \n");
-        this.moveToBoardIndex = new HashMap<String, Integer>() {{
-            put("1", 0);
-            put("2", 2);
-            put("3", 4);
-            put("4", 6);
-            put("5", 8);
-            put("6", 10);
-            put("7", 12);
-            put("8", 14);
-            put("9", 16);
-        }};
+        this.tokens = tokens;
     }
 
 
-    public void receiveMove(String move) {
-        Integer boardIndex = convertMoveToBoardIndex(move);
-        char[] boardChars = board.toCharArray();
-        boardChars[boardIndex] = 'X';
-        this.board = String.valueOf(boardChars);
+    public void receiveMove(Integer move, String piece) {
+        tokens.set(move-1, piece);
 
     }
 
     public void printBoard() {
-        stream.println(board);
+        stream.println(" " +tokens.get(0) + "| " + tokens.get(1) + "| " + tokens.get(2) + "\n" +
+                                 "--------" + "\n" +
+                       " " +tokens.get(3) + "| " + tokens.get(4) + "| " + tokens.get(5) + "\n" +
+                                 "--------" + "\n" +
+                       " " +tokens.get(6) + "| " + tokens.get(7) + "| " + tokens.get(8));
     }
 
-    public Integer convertMoveToBoardIndex(String move) {
-        Integer boardIndex = (Integer) moveToBoardIndex.get(move);
-        return boardIndex;
-
-
-
-    }
 }

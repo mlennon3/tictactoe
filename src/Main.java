@@ -1,5 +1,7 @@
-import java.io.*;
-import java.nio.Buffer;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
 
 /**
  * Created by mslennon on 3/6/14.
@@ -7,9 +9,17 @@ import java.nio.Buffer;
 
 class Main {
     public static void main(String[]args) throws IOException {
-        Board board = new Board(System.out);
+        ArrayList tokens = new ArrayList<String>();
+        for (int i = 0; i < 9; i++) {
+            tokens.add(" ");
+        }
+
+        Player player1 = new Player("X");
+        Player player2 = new Player("O");
+
+        Board board = new Board(System.out, tokens);
         GetInput in = new GetInput(new BufferedReader(new InputStreamReader(System.in)));
-        GameRunner gamerunner = new GameRunner(System.out, in, board);
+        GameRunner gamerunner = new GameRunner(System.out, in, board, player1, player2);
         gamerunner.go();
     }
 }

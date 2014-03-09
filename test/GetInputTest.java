@@ -1,11 +1,11 @@
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.Mockito;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 
-import static org.junit.Assert.assertEquals;
+import static org.hamcrest.core.Is.is;
+import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.*;
 
 /**
@@ -26,7 +26,7 @@ public class GetInputTest {
     public void shouldGetUserMove() throws IOException {
         when(reader.readLine()).thenReturn("1");
         getInput.returnUserInput();
-        assertEquals(getInput.returnUserInput(), "1");
+        assertThat(getInput.returnUserInput(), is(1));
 
     }
 
