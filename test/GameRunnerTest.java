@@ -10,7 +10,6 @@ import static org.mockito.Mockito.*;
  * Created by mslennon on 3/6/14.
  */
 
-
 public class GameRunnerTest {
     private GameRunner runner;
     private PrintStream stream;
@@ -37,6 +36,7 @@ public class GameRunnerTest {
     @Test
     public void shouldTakeMoveFromGetInputAndPassItToBoard() throws IOException {
         when(in.returnUserInput()).thenReturn(1);
+        when(board.isEmptySpace(1)).thenReturn(true);
 
         runner.go();
 
@@ -47,7 +47,7 @@ public class GameRunnerTest {
     @Test
     public void shouldTakeMoveFromSecondPlayerAndPassItToBoard() throws IOException{
         when(in.returnUserInput()).thenReturn(1).thenReturn(2);
-
+        when(board.isEmptySpace(2)).thenReturn(true);
         runner.go();
 
         verify(board).receiveMove(2, "O");
@@ -56,7 +56,8 @@ public class GameRunnerTest {
 
     @Test
     public void shouldPromptPlayer1ToMove() throws IOException {
-
+        when(board.isEmptySpace(1)).thenReturn(true).thenReturn(true);
+        when(in.returnUserInput()).thenReturn(1);
         runner.go();
         verify(stream).println("Player 1 please go");
     }
@@ -64,11 +65,24 @@ public class GameRunnerTest {
     @Test
     public void shouldPromptPlayer2ToMove() throws  IOException {
         when(in.returnUserInput()).thenReturn(1);
+        when(board.isEmptySpace(1)).thenReturn(true);
 
         runner.go();
 
         verify(stream).println("Player 2 please go");
     }
+
+
+    @Test
+    public void shouldDisplayLocationAlreadyTaken() throws IOException {
+        when(in.returnUserInput()).thenReturn(1);
+        when(board.isEmptySpace(1)).thenReturn(false).thenReturn(true);
+
+        runner.go();
+
+        verify(stream).println("Location Already Taken");
+    }
+
 }
 
 

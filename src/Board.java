@@ -20,6 +20,10 @@ public class Board {
 
     }
 
+    public boolean isEmptySpace(Integer move) {
+        return tokens.get(move-1).equals(" ");
+    }
+
     public void printBoard() {
         stream.println(" " +tokens.get(0) + "| " + tokens.get(1) + "| " + tokens.get(2) + "\n" +
                                  "--------" + "\n" +

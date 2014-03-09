@@ -34,8 +34,11 @@ public class GameRunner {
         board.printBoard();
         while (turn < 2) {
             Player currentPlayer = turnOrder.remove(0);
+
             stream.println(currentPlayer.getName() + " please go");
+
             tellBoardNextMove(currentPlayer.getPiece());
+
             turnOrder.add(1, currentPlayer);
             board.printBoard();
             turn++;
@@ -44,8 +47,12 @@ public class GameRunner {
 
     private void tellBoardNextMove(String piece) throws IOException {
         Integer currentMove = getUserMove();
-        board.receiveMove(currentMove, piece);
-    }
+        while (!board.isEmptySpace(currentMove)) {
+            stream.println("Location Already Taken");
+            currentMove = getUserMove();
+        }
+            board.receiveMove(currentMove, piece);
+        }
 
 
     private Integer getUserMove() throws IOException {
