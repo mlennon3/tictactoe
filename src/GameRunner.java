@@ -21,17 +21,14 @@ public class GameRunner {
     public void go() throws IOException {
         board.printBoard();
         tellBoardNextMove();
+        board.printBoard();
     }
 
     private void tellBoardNextMove() throws IOException {
         String currentMove = getUserMove();
-        if ("badInput".equals(currentMove)) {
-            tellBoardNextMove();
-        }
-        else {
-            board.receiveMove(currentMove);
+        board.receiveMove(currentMove);
     }
-    }
+
 
     private String getUserMove() throws IOException {
         stream.println("Please Choose A Number 1-9");

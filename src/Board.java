@@ -33,7 +33,6 @@ public class Board {
         char[] boardChars = board.toCharArray();
         boardChars[boardIndex] = 'X';
         this.board = String.valueOf(boardChars);
-        printBoard();
 
     }
 

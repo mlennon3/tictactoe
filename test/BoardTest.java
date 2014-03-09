@@ -4,7 +4,6 @@ import org.junit.Test;
 import java.io.IOException;
 import java.io.PrintStream;
 
-import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
@@ -34,7 +33,9 @@ public class BoardTest {
     @Test
     public void shouldInsertXIntoBoard() {
         board.receiveMove("1");
+
         board.printBoard();
+
         verify(stream).println("X|_|_\n" +
                 "_|_|_\n" +
                 " | | \n");
