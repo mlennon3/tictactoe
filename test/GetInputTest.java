@@ -8,10 +8,6 @@ import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.*;
 
-/**
- * Created by mslennon on 3/6/14.
- */
-
 public class GetInputTest {
     private BufferedReader reader;
     private GetInput getInput;
@@ -25,7 +21,9 @@ public class GetInputTest {
     @Test
     public void shouldGetUserMove() throws IOException {
         when(reader.readLine()).thenReturn("1");
+
         getInput.returnUserInput();
+
         assertThat(getInput.returnUserInput(), is(1));
 
     }
@@ -33,10 +31,11 @@ public class GetInputTest {
     @Test
     public void shouldRePromptWhenGettingBadInput() throws IOException {
         when(reader.readLine()).thenReturn("adfadsf").thenReturn("0").thenReturn("1");
+
         getInput.returnUserInput();
+
         verify(reader, times(3)).readLine();
     }
-
 
 
 }

@@ -1,13 +1,10 @@
 import java.io.PrintStream;
 import java.util.ArrayList;
 
-/**
- * Created by mslennon on 3/6/14.
- */
+
 public class Board {
     private PrintStream stream;
-    private String board;
-    private ArrayList tokens;
+    private ArrayList<String> tokens;
 
     public Board(PrintStream stream, ArrayList<String> tokens) {
         this.stream = stream;
@@ -15,9 +12,15 @@ public class Board {
     }
 
 
-    public void receiveMove(Integer move, String piece) {
-        tokens.set(move - 1, piece);
-
+    public boolean receiveMove(Integer move, String piece) {
+        if (this.isEmptySpace(move)) {
+            tokens.set(move - 1, piece);
+            return true;
+        }
+        else {
+            stream.println("Location Already Taken");
+            return false;
+        }
     }
 
     public boolean isEmptySpace(Integer move) {

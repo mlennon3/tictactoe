@@ -2,9 +2,6 @@ import java.io.IOException;
 import java.io.PrintStream;
 import java.util.ArrayList;
 
-/**
- * Created by mslennon on 3/6/14.
- */
 public class GameRunner {
 
     private final PrintStream stream;
@@ -26,11 +23,8 @@ public class GameRunner {
 
 
     public void go() throws IOException {
-        gameLoop();
-    }
-
-    private void gameLoop() throws IOException {
         board.printBoard();
+
         while (!board.isFull()) {
             Player currentPlayer = turnOrder.remove(0);
 
@@ -41,17 +35,18 @@ public class GameRunner {
             turnOrder.add(1, currentPlayer);
             board.printBoard();
         }
+
         stream.println("Game is a draw");
 
     }
 
     private void tellBoardNextMove(String piece) throws IOException {
         Integer currentMove = getUserMove();
-        while (!board.isEmptySpace(currentMove)) {
-            stream.println("Location Already Taken");
+
+        while (!board.receiveMove(currentMove, piece)) {
             currentMove = getUserMove();
         }
-        board.receiveMove(currentMove, piece);
+
     }
 
 

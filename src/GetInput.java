@@ -3,9 +3,6 @@ import java.io.IOException;
 
 import static org.apache.commons.lang3.StringUtils.isNumeric;
 
-/**
- * Created by mslennon on 3/6/14.
- */
 public class GetInput {
     private final BufferedReader reader;
     private Integer responseInt;

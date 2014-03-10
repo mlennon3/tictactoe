@@ -3,13 +3,10 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
-/**
- * Created by mslennon on 3/6/14.
- */
 
 class Main {
     public static void main(String[] args) throws IOException {
-        ArrayList tokens = new ArrayList<String>();
+        ArrayList<String> tokens = new ArrayList<String>();
         for (int i = 0; i < 9; i++) {
             tokens.add(" ");
         }
@@ -20,6 +17,7 @@ class Main {
         Board board = new Board(System.out, tokens);
         GetInput in = new GetInput(new BufferedReader(new InputStreamReader(System.in)));
         GameRunner gamerunner = new GameRunner(System.out, in, board, player1, player2);
+
         gamerunner.go();
     }
 }
